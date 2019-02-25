@@ -23,6 +23,8 @@
         function onYouTubePlayerAPIReady() {
             player = new YT.Player("ytplayer", {
                 videoId: "bavHeaMo8vk",
+                autoplay: 1,
+                loop: 1,
                 events: {
                     "onReady": onPlayerReady,
                 }
