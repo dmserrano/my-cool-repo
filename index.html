@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Got'em</title>
-
-    <style>
-        iframe {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
-    <div style="margin: auto">
-        <iframe
-            style="height: 98vh;"
-            src="https://www.youtube.com/embed/bavHeaMo8vk?autoplay=1&amp;loop=1">
-        </iframe>
-    </div>
+    <div style="height: 98vh; width: 100%;" id="ytplayer"></div>
+
+    <script>
+        // Load the IFrame Player API code asynchronously.
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/player_api";
+        const firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Replace the "ytplayer" element with an <iframe> and
+        // YouTube player after the API code downloads.
+        let player;
+
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player("ytplayer", {
+                videoId: "bavHeaMo8vk",
+                events: {
+                    "onReady": onPlayerReady,
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+    </script>
 </body>
 </html>
