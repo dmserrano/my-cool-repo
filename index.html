@@ -5,34 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Got'em</title>
+
+    <style>
+        #play-button {
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            margin-top: 100px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div style="height: 98vh; width: 100%;" id="ytplayer"></div>
+    <div style="display: flex; justify-content: center">
+        <button
+            onclick="playVideo()"
+            id="play-button">
+            Click for something cool!
+        </button>
+
+        <video
+            id="player"
+            hidden="true"
+            src="/video.mp4"
+            type="video/mp4"
+            controls
+            style="height: 100vh; width: 100%;">
+        </video>
+    </div>
 
     <script>
-        // Load the IFrame Player API code asynchronously.
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/player_api";
-        const firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        const button = document.querySelector("#play-button");
+        const player = document.querySelector("#player");
 
-        // Replace the "ytplayer" element with an <iframe> and
-        // YouTube player after the API code downloads.
-        let player;
-
-        function onYouTubePlayerAPIReady() {
-            player = new YT.Player("ytplayer", {
-                videoId: "bavHeaMo8vk",
-                autoplay: 1,
-                loop: 1,
-                events: {
-                    "onReady": onPlayerReady,
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
+        function playVideo() {
+            player.play();
+            button.hidden = true;
+            player.hidden = false;
         }
     </script>
 </body>
